@@ -11,5 +11,16 @@ class Meal extends Model
 
     protected $table = 'meals';
 
-    protected $fillable = ['name', 'category_id', 'recipe', 'price', 'proteins', 'fats', 'carbs', 'image'];
+    protected $fillable = [
+        'name',
+        'category_id',
+        'recipe',
+        'price',
+        'proteins',
+        'fats',
+        'carbs',
+        'image'
+    ];
+
+    protected $hidden = ['created_at', 'updated_at'];
 }
