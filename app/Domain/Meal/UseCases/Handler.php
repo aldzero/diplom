@@ -17,8 +17,16 @@ class Handler
     }
 
 
-    public function handle(): Collection
+    public function handle(Command $command): ?Collection
     {
+        if ($command->category) {
+            return $this->queries->filter($command->category);
+        }
+
+        if ($command->search) {
+            return $this->queries->find($command->search);
+        }
+
         return $this->queries->all();
     }
 }
