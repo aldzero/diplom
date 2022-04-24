@@ -12,10 +12,13 @@ return new class extends Migration {
      */
     public function up()
     {
-        Schema::create('cart_positions', function (Blueprint $table) {
+        Schema::create('nutritional_values', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('cart_id')->references('id')->on('carts')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('meal_id')->references('id')->on('meals')->onUpdate('cascade')->onDelete('cascade');
+            $table->float('value')->nullable(false);
+            $table->float('proteins')->nullable(false);
+            $table->float('fats')->nullable(false);
+            $table->float('carbs')->nullable(false);
             $table->timestamps();
         });
     }
@@ -27,6 +30,6 @@ return new class extends Migration {
      */
     public function down()
     {
-        Schema::dropIfExists('cart_positions');
+        Schema::dropIfExists('nutritional_values');
     }
 };

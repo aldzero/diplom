@@ -5,11 +5,12 @@ declare(strict_types=1);
 namespace App\Domain\Meal\UseCases;
 
 use App\Domain\Meal\Queries\MealQueries;
+use App\Http\Actions\Meal\Response\MealItemsDTO;
 use Illuminate\Database\Eloquent\Collection;
 
 class Handler
 {
-    private $queries;
+    private MealQueries $queries;
 
     public function __construct(MealQueries $queries)
     {
@@ -17,7 +18,7 @@ class Handler
     }
 
 
-    public function handle(Command $command): ?Collection
+    public function handle(Command $command): MealItemsDTO|Collection
     {
         if ($command->category) {
             return $this->queries->filter($command->category);
@@ -27,6 +28,8 @@ class Handler
             return $this->queries->find($command->search);
         }
 
-        return $this->queries->all();
+        $result = $this->queries->all();
+
+        return new MealItemsDTO($result);
     }
 }

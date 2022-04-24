@@ -12,22 +12,16 @@ return new class extends Migration {
      */
     public function up()
     {
-        Schema::create('carts', function (Blueprint $table) {
+        Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
-            $table->integer('amount');
-            $table->float('sum');
+            $table->string('name')->nullable(false);
+            $table->string('image');
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
-        Schema::dropIfExists('carts');
+        Schema::dropIfExists('products');
     }
 };

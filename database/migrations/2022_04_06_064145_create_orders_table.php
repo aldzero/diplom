@@ -14,8 +14,15 @@ return new class extends Migration {
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('cart_id')->references('id')->on('carts')->onUpdate('cascade')->onDelete('cascade');
+            $table->string('user_name');
+            $table->string('user_phone');
+            $table->string('user_address');
+            $table->string('user_additional_info')->nullable();
+            $table->integer('count')->default(1);
+            $table->foreignId('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('meal_id')->references('id')->on('meals')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('status')->references('id')->on('order_statuses')->onUpdate('cascade')->onDelete('cascade');
+            $table->date('closed_at')->nullable();
             $table->timestamps();
         });
     }

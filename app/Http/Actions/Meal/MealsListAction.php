@@ -20,6 +20,6 @@ class MealsListAction
 
         $result = $handler->handle($command);
 
-        return new JsonResponse($result->toArray());
+        return new JsonResponse($result);
     }
 }
